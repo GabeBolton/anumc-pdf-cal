@@ -7,9 +7,9 @@ df = read_pdf("2023 Yearly Booking Schedule - ANU Mountaineering Club.pdf", page
 df = pd.concat(df)
 df = df[(df['Date'] != 'TOTAL:')] # remove the final total hours entry
 
-df['Start Time'] = pd.to_datetime(df['Date'].str.lstrip('MoWeFr ') + ' ' + df['From Time'])
+df['Start Time'] = pd.to_datetime(df['Date'].str.lstrip('MoWeFr ') + ' ' + df['From Time'], dayfirst=True)
 df['Start Time'] = df['Start Time'].dt.tz_localize('Australia/ACT')
-df['End Time'] = pd.to_datetime(df['Date'].str.lstrip('MoWeFr ') + ' ' + df['To Time'])
+df['End Time'] = pd.to_datetime(df['Date'].str.lstrip('MoWeFr ') + ' ' + df['To Time'], dayfirst=True)
 df['End Time'] = df['End Time'].dt.tz_localize('Australia/ACT')
 
 c = Calendar()
